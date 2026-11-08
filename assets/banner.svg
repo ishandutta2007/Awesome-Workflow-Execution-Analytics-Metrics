@@ -1,0 +1,210 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 250" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d16"/>
+      <stop offset="50%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+
+    <!-- Accent Gradients -->
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#818cf8"/>
+      <stop offset="100%" stop-color="#c084fc"/>
+    </linearGradient>
+
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.9"/>
+    </linearGradient>
+
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="50%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+
+    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.1"/>
+      <stop offset="50%" stop-color="#818cf8" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.1"/>
+    </linearGradient>
+
+    <!-- Filters -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Background Pattern -->
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#38bdf8" stroke-width="0.5" stroke-opacity="0.08"/>
+      <circle cx="30" cy="0" r="1" fill="#38bdf8" fill-opacity="0.15"/>
+    </pattern>
+
+    <!-- Dynamic Styles & Animations -->
+    <style>
+      @keyframes pulseNode {
+        0%, 100% { transform: scale(1); opacity: 0.8; }
+        50% { transform: scale(1.15); opacity: 1; }
+      }
+      @keyframes flowData {
+        0% { stroke-dashoffset: 120; }
+        100% { stroke-dashoffset: 0; }
+      }
+      @keyframes pulseBar1 {
+        0%, 100% { height: 26px; y: 154px; }
+        50% { height: 42px; y: 138px; }
+      }
+      @keyframes pulseBar2 {
+        0%, 100% { height: 48px; y: 132px; }
+        50% { height: 30px; y: 150px; }
+      }
+      @keyframes pulseBar3 {
+        0%, 100% { height: 36px; y: 144px; }
+        50% { height: 56px; y: 124px; }
+      }
+      @keyframes pulseBar4 {
+        0%, 100% { height: 60px; y: 120px; }
+        50% { height: 38px; y: 142px; }
+      }
+      @keyframes floatParticle {
+        0%, 100% { transform: translateY(0); opacity: 0.3; }
+        50% { transform: translateY(-8px); opacity: 0.9; }
+      }
+      @keyframes scanBeam {
+        0% { transform: translateX(-100px); opacity: 0; }
+        50% { opacity: 0.4; }
+        100% { transform: translateX(950px); opacity: 0; }
+      }
+      .node-pulse {
+        animation: pulseNode 3s ease-in-out infinite;
+        transform-origin: center;
+      }
+      .data-stream {
+        stroke-dasharray: 6 6;
+        animation: flowData 2.5s linear infinite;
+      }
+      .bar-1 { animation: pulseBar1 3s ease-in-out infinite; }
+      .bar-2 { animation: pulseBar2 2.6s ease-in-out infinite; }
+      .bar-3 { animation: pulseBar3 3.4s ease-in-out infinite; }
+      .bar-4 { animation: pulseBar4 2.8s ease-in-out infinite; }
+      .particle { animation: floatParticle 4s ease-in-out infinite; }
+      .scanner { animation: scanBeam 6s linear infinite; }
+    </style>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="100%" height="100%" fill="url(#bgGrad)"/>
+  <rect width="100%" height="100%" fill="url(#grid)"/>
+
+  <!-- Scanning laser line in background -->
+  <line class="scanner" x1="0" y1="0" x2="0" y2="250" stroke="url(#lineGrad)" stroke-width="2"/>
+
+  <!-- Subtle Ambient Glow Orbs in Background -->
+  <circle cx="120" cy="50" r="100" fill="#38bdf8" opacity="0.08" filter="url(#softGlow)"/>
+  <circle cx="820" cy="180" r="120" fill="#a855f7" opacity="0.08" filter="url(#softGlow)"/>
+
+  <!-- ================= BACKGROUND DYNAMIC ELEMENTS ================= -->
+  <!-- Left Side: Dynamic Pipeline & DAG Graph -->
+  <g opacity="0.75">
+    <!-- Connecting Workflow Data Stream Lines -->
+    <path class="data-stream" d="M 45 70 L 110 70 L 145 125 L 85 180 L 140 180" fill="none" stroke="#38bdf8" stroke-width="1.8"/>
+    <path class="data-stream" d="M 110 70 L 175 70" fill="none" stroke="#818cf8" stroke-width="1.8" style="animation-duration: 3s;"/>
+    <path class="data-stream" d="M 145 125 L 210 125" fill="none" stroke="#c084fc" stroke-width="1.8" style="animation-duration: 2s;"/>
+
+    <!-- Graph Nodes -->
+    <circle cx="45" cy="70" r="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <circle class="node-pulse" cx="45" cy="70" r="3" fill="#38bdf8"/>
+
+    <circle cx="110" cy="70" r="9" fill="#1e293b" stroke="#818cf8" stroke-width="2"/>
+    <circle class="node-pulse" cx="110" cy="70" r="3.5" fill="#818cf8"/>
+
+    <circle cx="175" cy="70" r="7" fill="#1e293b" stroke="#c084fc" stroke-width="2"/>
+    <circle class="node-pulse" cx="175" cy="70" r="3" fill="#c084fc"/>
+
+    <circle cx="145" cy="125" r="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2.2"/>
+    <circle class="node-pulse" cx="145" cy="125" r="4" fill="#38bdf8"/>
+
+    <circle cx="210" cy="125" r="7" fill="#1e293b" stroke="#818cf8" stroke-width="2"/>
+    <circle class="node-pulse" cx="210" cy="125" r="3" fill="#818cf8"/>
+
+    <circle cx="85" cy="180" r="8" fill="#1e293b" stroke="#ec4899" stroke-width="2"/>
+    <circle class="node-pulse" cx="85" cy="180" r="3" fill="#ec4899"/>
+
+    <circle cx="140" cy="180" r="8" fill="#1e293b" stroke="#22c55e" stroke-width="2"/>
+    <circle class="node-pulse" cx="140" cy="180" r="3" fill="#22c55e"/>
+  </g>
+
+  <!-- Right Side: Analytics Telemetry & Histogram Bars -->
+  <g opacity="0.85">
+    <!-- Mini Telemetry Card -->
+    <rect x="730" y="55" width="145" height="135" rx="10" fill="url(#cardGrad)" stroke="#334155" stroke-width="1.2"/>
+    <rect x="742" y="68" width="55" height="7" rx="3.5" fill="#38bdf8" opacity="0.6"/>
+    <circle cx="855" cy="72" r="3.5" fill="#22c55e" filter="url(#glow)"/>
+
+    <!-- Waveform Telemetry Path -->
+    <path class="data-stream" d="M 740 100 Q 755 85 770 100 T 800 100 T 830 92 T 860 100" fill="none" stroke="#38bdf8" stroke-width="1.8"/>
+
+    <!-- Dynamic Metric Histogram Bars -->
+    <rect class="bar-1" x="748" y="154" width="12" height="26" rx="2" fill="#38bdf8" opacity="0.85"/>
+    <rect class="bar-2" x="772" y="132" width="12" height="48" rx="2" fill="#818cf8" opacity="0.85"/>
+    <rect class="bar-3" x="796" y="144" width="12" height="36" rx="2" fill="#a855f7" opacity="0.85"/>
+    <rect class="bar-4" x="820" y="120" width="12" height="60" rx="2" fill="#06b6d4" opacity="0.85"/>
+    <rect x="844" y="138" width="12" height="42" rx="2" fill="#ec4899" opacity="0.85"/>
+  </g>
+
+  <!-- Floating Signal Particles (background decoration) -->
+  <circle class="particle" cx="240" cy="65" r="2" fill="#38bdf8" style="animation-delay: 0.2s;"/>
+  <circle class="particle" cx="300" cy="195" r="1.8" fill="#818cf8" style="animation-delay: 1.5s;"/>
+  <circle class="particle" cx="680" cy="60" r="2.2" fill="#c084fc" style="animation-delay: 0.8s;"/>
+  <circle class="particle" cx="710" cy="190" r="1.6" fill="#38bdf8" style="animation-delay: 2.1s;"/>
+
+  <!-- ================= FOREGROUND HERO CONTENT ================= -->
+  <!-- Header Icon Badge -->
+  <g transform="translate(460, 48)">
+    <rect x="-85" y="-14" width="170" height="28" rx="14" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <circle cx="-62" cy="0" r="5" fill="#22c55e" filter="url(#glow)"/>
+    <text x="-48" y="4.5" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="600" letter-spacing="1">OBSERVABILITY &amp; APM</text>
+  </g>
+
+  <!-- Title: Foreground, High-Contrast & Gradient -->
+  <!-- Note: SVG filter drop-shadow guarantees it stands out crisp against any background elements -->
+  <g filter="url(#softGlow)">
+    <text x="460" y="108" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="31" font-weight="800" fill="url(#primaryGrad)" letter-spacing="-0.5">
+      Awesome Workflow Execution
+    </text>
+    <text x="460" y="146" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="31" font-weight="800" fill="#f8fafc" letter-spacing="-0.5">
+      Analytics &amp; Metrics
+    </text>
+  </g>
+
+  <!-- Subtitle: Foreground, Clear Description -->
+  <text x="460" y="182" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#94a3b8">
+    Curated telemetry, execution tracking, latency profiling &amp; observability for automated pipelines
+  </text>
+
+  <!-- Status / Feature Badges in Foreground -->
+  <g transform="translate(460, 214)">
+    <!-- Pill 1 -->
+    <rect x="-165" y="-12" width="102" height="23" rx="11.5" fill="#0f172a" stroke="#38bdf8" stroke-width="0.9" opacity="0.95"/>
+    <text x="-114" y="3.5" text-anchor="middle" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10.5" font-weight="600">⚡ Real-time Telemetry</text>
+
+    <!-- Pill 2 -->
+    <rect x="-53" y="-12" width="106" height="23" rx="11.5" fill="#0f172a" stroke="#818cf8" stroke-width="0.9" opacity="0.95"/>
+    <text x="0" y="3.5" text-anchor="middle" fill="#818cf8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10.5" font-weight="600">📊 OpenTelemetry / APM</text>
+
+    <!-- Pill 3 -->
+    <rect x="63" y="-12" width="102" height="23" rx="11.5" fill="#0f172a" stroke="#c084fc" stroke-width="0.9" opacity="0.95"/>
+    <text x="114" y="3.5" text-anchor="middle" fill="#c084fc" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10.5" font-weight="600">🌐 Distributed Tracing</text>
+  </g>
+</svg>
