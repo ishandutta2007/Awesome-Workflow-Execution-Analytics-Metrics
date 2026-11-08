@@ -127,7 +127,7 @@ Commercial, cloud-hosted Workflow Execution Analytics and APM observability plat
 
 ## 🟩 Open-Source Software
 
-Self-hosted, community-driven Workflow Execution Analytics, monitoring, and orchestration platforms. Sorted descending by GitHub Stars_Count.
+Self-hosted, community-driven Workflow Execution Analytics, monitoring, and orchestration platforms. Sorted descending by GitHub_Stars_Count.
 
 ### [Prometheus](https://github.com/prometheus/prometheus) [![Stars](https://img.shields.io/github/stars/prometheus/prometheus?style=social&color=white)](https://github.com/prometheus/prometheus/stargazers)
 - **Stack:** Go | **License:** Apache 2.0  
