@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="https://github.com/ishandutta2007/Awesome-Awesome-Awesome"><img src="https://img.shields.io/badge/Awesome-%E2%9C%94-blueviolet?style=flat-square&logo=github" alt="Awesome"/></a><a href="https://discord.gg/jc4xtF58Ve"><img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord" /></a>
-  <a href="https://github.com/ishandutta2007/Awesome-Workflow-Execution-Analytics-Metrics/stargazers"><img src="https://img.shields.io/github/stars/ishandutta2007/Awesome-Workflow-Execution-Analytics-Metrics?style=flat-square&color=gold" alt="GitHub Stars"/></a>
+  <a href="https://github.com/ishandutta2007/Awesome-Workflow-Execution-Analytics-Metrics/stargazers"><img src="https://img.shields.io/github/stars/ishandutta2007/Awesome-Workflow-Execution-Analytics-Metrics?style=flat-square&color=gold" alt="GitHub_Stars"/></a>
   <a href="https://github.com/ishandutta2007/Awesome-Workflow-Execution-Analytics-Metrics/network/members"><img src="https://img.shields.io/github/forks/ishandutta2007/Awesome-Workflow-Execution-Analytics-Metrics?style=flat-square&color=blue" alt="GitHub Forks"/></a>
   <a href="https://github.com/ishandutta2007/Awesome-Workflow-Execution-Analytics-Metrics/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-CC0_1.0-green.svg?style=flat-square" alt="License"/></a>
   <a href="https://github.com/ishandutta2007/Awesome-Workflow-Execution-Analytics-Metrics/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"/></a>
@@ -127,7 +127,7 @@ Commercial, cloud-hosted Workflow Execution Analytics and APM observability plat
 
 ## 🟩 Open-Source Software
 
-Self-hosted, community-driven Workflow Execution Analytics, monitoring, and orchestration platforms. Sorted descending by GitHub Star count.
+Self-hosted, community-driven Workflow Execution Analytics, monitoring, and orchestration platforms. Sorted descending by GitHub Stars_Count.
 
 ### [Prometheus](https://github.com/prometheus/prometheus) [![Stars](https://img.shields.io/github/stars/prometheus/prometheus?style=social&color=white)](https://github.com/prometheus/prometheus/stargazers)
 - **Stack:** Go | **License:** Apache 2.0  
@@ -236,8 +236,8 @@ Self-hosted, community-driven Workflow Execution Analytics, monitoring, and orch
 Contributions are warmly welcome! To contribute an open-source workflow execution analytics or observability project:
 
 1. 🍴 **Fork the repository**
-2. 📝 **Add your tool** to [`README.md`](file:///C:/Users/hp/Documents/Projects/Awesome-Workflow-Execution-Analytics-Metrics/README.md) under the appropriate category with accurate GitHub links and star badges.
-3. 📌 **Include key details**: Name, stack, open-source license, star badge, and why it stands out.
+2. 📝 **Add your tool** to [`README.md`](file:///C:/Users/hp/Documents/Projects/Awesome-Workflow-Execution-Analytics-Metrics/README.md) under the appropriate category with accurate GitHub links and Stars_Badges.
+3. 📌 **Include key details**: Name, stack, open-source license, Stars_Badge, and why it stands out.
 4. 🔍 Ensure the project is **actively maintained** (releases or commits within the last 12 months) and relevant to workflow execution analytics.
 5. 📬 **Submit a Pull Request** with a clear explanation of the addition.
 
