@@ -21,11 +21,19 @@
   - [Coralogix](#coralogix)
 - [Open-Source Software](#-open-source-software)
   - [Prometheus](#prometheus)
-  - [Granyt](#granyt)
-  - [n8n-trace](#n8n-trace)
-  - [Grafana n8n Dashboard](#grafana-n8n-dashboard)
+  - [Apache Airflow](#apache-airflow)
+  - [SigNoz](#signoz)
+  - [Temporal](#temporal)
+  - [Prefect](#prefect)
+  - [Jaeger](#jaeger)
+  - [Argo Workflows](#argo-workflows)
+  - [Dagster](#dagster)
+  - [Flyte](#flyte)
   - [OpenTelemetry](#opentelemetry)
-  - [Starflow](#starflow)
+  - [OpenLineage](#openlineage)
+  - [Domino](#domino)
+  - [n8nTrace](#n8ntrace)
+  - [Grafana n8n Dashboards](#grafana-n8n-dashboards)
 - [Comparison at a Glance](#-comparison-at-a-glance)
 - [Contributing](#-contributing)
 
@@ -84,37 +92,77 @@ Coralogix provides a GitHub Action that exports telemetry from completed GitHub 
 
 ## 🟩 Open-Source Software
 
-Self-hosted, community-driven Workflow Execution Analytics tools. The open-source ecosystem for dedicated workflow analytics is emerging; many tools are extensions for specific workflow engines.
+Self-hosted, community-driven Workflow Execution Analytics, monitoring, and orchestration platforms. Sorted descending by GitHub Star count.
 
-### Prometheus
+### [Prometheus](https://github.com/prometheus/prometheus) [![Stars](https://img.shields.io/github/stars/prometheus/prometheus?style=social&color=white)](https://github.com/prometheus/prometheus/stargazers)
 **Stack:** Go | **License:** Apache 2.0  
 The de facto standard for metrics collection and alerting in cloud-native environments. Prometheus can monitor workflow execution through custom metrics exported by workflow engines. Example alert rules from a Go workflow library demonstrate patterns for detecting high error rates (`rate(workflow_process_error_count[5m]) > 0.1`), consumer lag (`workflow_process_lag_alert == 1`), process down states (`workflow_process_states == 0`), high skip rates, slow processing (95th percentile latency), and low completion rates [citation:10]. Workflow engines like Argo Workflows expose Prometheus metrics on port 9090 by default [citation:20].  
 **Best for:** Teams wanting a standard, battle-tested metrics foundation for workflow alerting and dashboards.
 
-### Granyt
-**Stack:** Python / Next.js / PostgreSQL | **License:** MIT  
-An open-source observability platform built specifically for Apache Airflow. The `granyt-sdk` installs as a lightweight listener that automatically captures DAG and task execution events without code changes. Features include automatic lineage tracking via OpenLineage, Sentry-like error capture with full stack traces and DAG context, operator adapters for Snowflake, BigQuery, dbt, S3, and others that extract rich metrics (row counts, bytes processed, query IDs), and custom DataFrame metrics from Pandas/Polars. Self-hosted via Docker Compose with PostgreSQL. No credit card or sales call required [citation:18][citation:23].  
-**Best for:** Airflow teams wanting purpose-built, self-hosted observability without enterprise observability platform costs.
+### [Apache Airflow](https://github.com/apache/airflow) [![Stars](https://img.shields.io/github/stars/apache/airflow?style=social&color=white)](https://github.com/apache/airflow/stargazers)
+**Stack:** Python | **License:** Apache 2.0  
+Industry-leading open-source workflow orchestration platform with rich built-in execution analytics and observability. Airflow provides comprehensive run history, task duration charts, landing times, Gantt views, execution status breakdowns, and native OpenTelemetry/StatsD metrics export for pipeline monitoring and alerting across large-scale data engineering workflows.  
+**Best for:** Teams requiring complex, programmatic DAG scheduling with built-in execution history, task latency graphs, and SLA monitoring.
 
-### n8n-trace
-**Stack:** Docker / PostgreSQL | **License:** Open Source (per community post)  
-A self-hosted observability dashboard for n8n workflows designed to provide visibility without exposing sensitive workflow data. A lightweight n8n workflow collects execution metadata (status, duration, workflow ID, instance ID) and writes it to a dedicated PostgreSQL database. Only operational metadata is stored — no payloads or secrets. Features include workflow execution analytics (success/failure rates, duration trends), instance health monitoring, Prometheus-style metrics explorer, multi-instance support, role-based access control scoped by instance/workflow ID/tag, and audit logging. Runs as a single Docker container alongside PostgreSQL [citation:22].  
-**Best for:** n8n users needing workflow performance visibility for business teams without exposing sensitive data.
+### [SigNoz](https://github.com/signoz/signoz) [![Stars](https://img.shields.io/github/stars/signoz/signoz?style=social&color=white)](https://github.com/signoz/signoz/stargazers)
+**Stack:** Go / TypeScript / ClickHouse | **License:** Open Source  
+An open-source, OpenTelemetry-native APM and observability platform that acts as an alternative to Datadog. SigNoz provides unified monitoring for traces, metrics, and logs with ClickHouse-powered analytics, making it ideal for deep execution tracing, step duration breakdown, and bottleneck identification across distributed workflows.  
+**Best for:** Teams seeking a self-hosted, Datadog-like observability suite built natively on OpenTelemetry to trace workflow steps and job durations.
 
-### Grafana n8n Dashboard
-**Stack:** Grafana / PostgreSQL | **License:** Open Source (per Grafana dashboard)  
-A Grafana dashboard (ID: 24475) for analyzing n8n workflow and execution performance using the PostgreSQL database backend. Provides executive summary metrics (total workflows, active workflows, executions in range, success rate, failed executions, running executions), execution performance trends (executions over time by status, P50/P95/P99 duration), workflow quality insights (most executed, daily success rate trend, most failures, slowest workflows), and resource/queue management (queue depth, long-running executions, recent errors). Requires Grafana ≥9, n8n with PostgreSQL, and PostgreSQL ≥12 [citation:16].  
-**Best for:** Teams already using Grafana wanting a ready-made n8n workflow analytics dashboard.
+### [Temporal](https://github.com/temporalio/temporal) [![Stars](https://img.shields.io/github/stars/temporalio/temporal?style=social&color=white)](https://github.com/temporalio/temporal/stargazers)
+**Stack:** Go | **License:** MIT  
+A resilient workflow execution platform for building durable microservices and distributed orchestrations. Temporal tracks complete workflow history, state transitions, retry attempts, timeout events, and activity execution latencies, exposing detailed SDK and server metrics via Prometheus for end-to-end execution reliability analytics.  
+**Best for:** Developers building mission-critical code-as-workflow systems requiring event history replay, failure analytics, and execution state guarantees.
 
-### OpenTelemetry
-**Stack:** Multiple (language SDKs) | **License:** Apache 2.0  
-A vendor-neutral observability framework for generating, collecting, and exporting telemetry data (traces, metrics, logs). Workflow engines and applications can instrument with OpenTelemetry SDKs to emit standardized telemetry that integrates with any compatible backend (Prometheus, Jaeger, Grafana Tempo, Datadog, etc.). Coralogix's GitHub Action uses the OpenTelemetry endpoint for exporting workflow telemetry [citation:9].  
+### [Prefect](https://github.com/prefecthq/prefect) [![Stars](https://img.shields.io/github/stars/prefecthq/prefect?style=social&color=white)](https://github.com/prefecthq/prefect/stargazers)
+**Stack:** Python | **License:** Apache 2.0  
+Modern open-source orchestration and workflow intelligence engine designed for Python developers. Features an interactive dashboard for flow run history, real-time state tracking, task concurrency metrics, failure root-cause analysis, and automated event-driven alerts for modern data and ML pipelines.  
+**Best for:** Python-first teams wanting modern workflow execution observability, task-level telemetry, and automated notifications.
+
+### [Jaeger](https://github.com/jaegertracing/jaeger) [![Stars](https://img.shields.io/github/stars/jaegertracing/jaeger?style=social&color=white)](https://github.com/jaegertracing/jaeger/stargazers)
+**Stack:** Go | **License:** Apache 2.0  
+CNCF graduated open-source distributed tracing platform. Jaeger enables end-to-end distributed tracing across complex workflow pipelines and microservices, allowing teams to visualize workflow DAG dependencies as trace timelines, isolate bottleneck tasks, and analyze latency distributions.  
+**Best for:** Visualizing individual workflow execution timelines, span latencies, and service dependencies in distributed setups.
+
+### [Argo Workflows](https://github.com/argoproj/argo-workflows) [![Stars](https://img.shields.io/github/stars/argoproj/argo-workflows?style=social&color=white)](https://github.com/argoproj/argo-workflows/stargazers)
+**Stack:** Go / Kubernetes | **License:** Apache 2.0  
+Kubernetes-native container workflow engine for parallel jobs, CI/CD, and machine learning pipelines. Provides real-time DAG and step visualization, pod-level execution logs, historical duration metrics, and native Prometheus metrics export on port 9090 for cluster-wide workflow monitoring [citation:20].  
+**Best for:** Kubernetes-native teams running containerized compute pipelines requiring real-time DAG execution tracking and Prometheus metrics.
+
+### [Dagster](https://github.com/dagster-io/dagster) [![Stars](https://img.shields.io/github/stars/dagster-io/dagster?style=social&color=white)](https://github.com/dagster-io/dagster/stargazers)
+**Stack:** Python / TypeScript | **License:** Apache 2.0  
+Cloud-native data orchestrator and asset management platform centered on data assets. Dagster UI provides rich execution analytics including run timelines, asset materialization history, compute duration comparisons, data lineage tracking, and automated error diagnostics.  
+**Best for:** Data platform teams managing asset-centric pipelines needing deep execution telemetry and data lineage analytics.
+
+### [Flyte](https://github.com/flyteorg/flyte) [![Stars](https://img.shields.io/github/stars/flyteorg/flyte?style=social&color=white)](https://github.com/flyteorg/flyte/stargazers)
+**Stack:** Python / Go / Kubernetes | **License:** Apache 2.0  
+Production-grade, type-safe workflow orchestrator for machine learning, data engineering, and AI pipelines. Offers detailed execution tracking, node-level runtime profiling, artifact caching analytics, reproducible execution logs, and Prometheus metrics out of the box.  
+**Best for:** Machine learning and AI workflows requiring typed task inputs/outputs, step-level duration profiling, and execution lineage.
+
+### [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-collector) [![Stars](https://img.shields.io/github/stars/open-telemetry/opentelemetry-collector?style=social&color=white)](https://github.com/open-telemetry/opentelemetry-collector/stargazers)
+**Stack:** Multiple (language SDKs) / Go | **License:** Apache 2.0  
+A vendor-neutral observability framework for generating, collecting, and exporting telemetry data (traces, metrics, logs). Workflow engines and applications can instrument with OpenTelemetry SDKs and use the OpenTelemetry Collector to emit standardized telemetry that integrates with any compatible backend (Prometheus, Jaeger, SigNoz, Grafana Tempo, Datadog, etc.) [citation:9].  
 **Best for:** Teams wanting vendor-neutral instrumentation that can feed any observability backend.
 
-### Starflow
-**Stack:** Python / React / Apache Airflow | **License:** Open Source (per PyPI)  
-An open-source workflow management platform with a GUI for creating, editing, and monitoring workflows. Every Starflow workflow corresponds to an Apache Airflow DAG, and each Piece corresponds to an Airflow task. The monitoring page shows real-time status of each workflow Piece, including logs and results of each run. Workflows can be scheduled periodically, at specific times, or triggered manually. Pieces run in isolated Docker containers and are versioned, tested, and documented. Scalable and Kubernetes-native [citation:21].  
+### [OpenLineage](https://github.com/OpenLineage/OpenLineage) [![Stars](https://img.shields.io/github/stars/OpenLineage/OpenLineage?style=social&color=white)](https://github.com/OpenLineage/OpenLineage/stargazers)
+**Stack:** Java / Python | **License:** Apache 2.0  
+An open standard and framework for lineage and operational metadata collection from workflow orchestrators (Airflow, Spark, Dagster, Flink). OpenLineage captures runtime execution events (START, COMPLETE, FAIL), task run durations, input/output dataset states, and job dependencies for end-to-end data pipeline governance and analytics.  
+**Best for:** Organizations tracking cross-system workflow execution lineage, dataset changes, and pipeline health metadata.
+
+### [Domino](https://github.com/Tauffer-Consulting/domino) [![Stars](https://img.shields.io/github/stars/Tauffer-Consulting/domino?style=social&color=white)](https://github.com/Tauffer-Consulting/domino/stargazers)
+**Stack:** Python / React / Apache Airflow | **License:** Apache 2.0  
+An open-source workflow creation and monitoring platform providing a visual drag-and-drop GUI on top of Apache Airflow. Modular components (called Pieces) execute in isolated Docker containers, mapping directly to Airflow tasks. The monitoring view offers real-time execution tracking, status updates, run logs, and task outputs [citation:21].  
 **Best for:** Teams wanting a visual workflow builder with real-time execution monitoring powered by Airflow.
+
+### [n8nTrace](https://github.com/Mohammedaljer/n8nTrace) [![Stars](https://img.shields.io/github/stars/Mohammedaljer/n8nTrace?style=social&color=white)](https://github.com/Mohammedaljer/n8nTrace/stargazers)
+**Stack:** Docker / PostgreSQL | **License:** MIT  
+A self-hosted observability dashboard for n8n workflows designed to provide visibility without exposing sensitive workflow data. A lightweight collector gathers execution metadata (status, duration, workflow ID, instance ID) and stores it in PostgreSQL. Features include execution analytics (success/failure rates, duration trends), instance health monitoring, Prometheus-style metrics explorer, RBAC, and audit logging [citation:22].  
+**Best for:** n8n users needing workflow performance visibility for business teams without exposing sensitive data.
+
+### [Grafana n8n Dashboards](https://github.com/nluecke/grafana-n8n-dashboards) [![Stars](https://img.shields.io/github/stars/nluecke/grafana-n8n-dashboards?style=social&color=white)](https://github.com/nluecke/grafana-n8n-dashboards/stargazers)
+**Stack:** Grafana / PostgreSQL | **License:** Open Source  
+A collection of Grafana dashboards (including Dashboard ID: 24475) for analyzing n8n workflow and execution performance using the PostgreSQL database backend. Provides executive summary metrics (total workflows, active workflows, executions in range, success rate, failed executions), execution performance trends (executions over time by status, P50/P95/P99 duration), workflow quality insights, and queue metrics [citation:16].  
+**Best for:** Teams already using Grafana wanting a ready-made n8n workflow analytics dashboard.
 
 ---
 
@@ -128,13 +176,23 @@ An open-source workflow management platform with a GUI for creating, editing, an
 | **Dynatrace** | Proprietary | Execution state | Dynatrace Workflows | ❌ | Programmatic state access |
 | **Grafana Cloud** | Proprietary | Run panel | Grafana Workflows | ❌ | Grafana Cloud users |
 | **Mixpanel Flows** | Proprietary | User journey | (Product events) | ❌ | Conversion path analysis |
+| **Segment** | Proprietary | Event pipeline | Any (downstream analytics) | ❌ | Workflow-related user event routing |
+| **Honeycomb** | Proprietary | AI observability | Any (distributed tracing) | ❌ | AI root cause analysis of system latencies |
 | **Coralogix** | Proprietary | CI/CD telemetry | GitHub Actions | ❌ | CI/CD pipeline observability |
 | **Prometheus** | Apache 2.0 | Metrics + alerting | Any (exporters) | ✅ | Standard metrics foundation |
-| **Granyt** | MIT | Airflow observability | Apache Airflow | ✅ | Airflow-specific OSS |
-| **n8n-trace** | Open Source | n8n observability | n8n | ✅ | n8n metadata-only visibility |
-| **Grafana n8n** | Open Source | Dashboard | n8n (PostgreSQL) | ✅ | Ready-made n8n dashboard |
-| **OpenTelemetry** | Apache 2.0 | Vendor-neutral telemetry | Any (instrumented) | ✅ (SDK) | Standardized instrumentation |
-| **Starflow** | Open Source | Visual workflow + monitoring | Apache Airflow | ✅ | Visual builder + real-time status |
+| **Apache Airflow** | Apache 2.0 | Workflow orchestration + analytics | Apache Airflow | ✅ | Programmatic DAGs + execution charts |
+| **SigNoz** | Open Source | OpenTelemetry APM | Any (OTel instrumented) | ✅ | Self-hosted APM & trace analytics |
+| **Temporal** | MIT | Durable execution + metrics | Temporal Workflows | ✅ | Microservice state & execution history |
+| **Prefect** | Apache 2.0 | Workflow orchestration + observability | Prefect Flows | ✅ | Python-first workflow execution UI |
+| **Jaeger** | Apache 2.0 | Distributed tracing | Any (OpenTelemetry / Jaeger) | ✅ | Distributed workflow step tracing |
+| **Argo Workflows** | Apache 2.0 | Kubernetes container workflows | Kubernetes / Argo | ✅ | Container DAG execution tracking |
+| **Dagster** | Apache 2.0 | Asset orchestration + analytics | Dagster Pipelines | ✅ | Asset-centric pipeline telemetry |
+| **Flyte** | Apache 2.0 | AI/ML pipeline orchestration | Kubernetes / Flyte | ✅ | Typed task profiling & execution lineage |
+| **OpenTelemetry** | Apache 2.0 | Vendor-neutral telemetry | Any (instrumented) | ✅ (SDK / Collector) | Standardized instrumentation |
+| **OpenLineage** | Apache 2.0 | Data pipeline lineage & metadata | Airflow, Spark, Dagster, Flink | ✅ | Cross-engine lineage & execution metadata |
+| **Domino** | Apache 2.0 | Visual workflow + monitoring | Apache Airflow | ✅ | Visual builder + real-time status |
+| **n8nTrace** | MIT | n8n observability dashboard | n8n | ✅ | n8n metadata-only visibility |
+| **Grafana n8n Dashboards** | Open Source | PostgreSQL analytics dashboard | n8n (PostgreSQL) | ✅ | Ready-made n8n dashboard |
 
 ---
 
